@@ -3,41 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
+    <title>Something Special for You</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #ffcccc;
+            background-color: #ffb6c1;
             text-align: center;
             font-family: Arial, sans-serif;
         }
         .container {
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .buttons {
-            margin-top: 20px;
+        h1 {
+            color: #ff4d4d;
         }
-        button {
-            padding: 10px 20px;
+        .heart-button {
+            background-color: #ff4d4d;
+            color: white;
+            font-size: 20px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+            display: inline-block;
+        }
+        .heart-button:hover {
+            transform: scale(1.1);
+        }
+        .cute-button {
             font-size: 18px;
-            margin: 10px;
+            padding: 15px 25px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 50px;
+            transition: transform 0.2s;
         }
         .yes {
-            background-color: #ff4d4d;
+            background-color: #ff69b4;
             color: white;
         }
         .no {
-            background-color: #ccc;
+            background-color: #d3d3d3;
             color: black;
+        }
+        .cute-button:hover {
+            transform: scale(1.1);
         }
         #message {
             display: none;
@@ -50,22 +68,40 @@
 </head>
 <body>
     <div class="container">
-        <h1>Will You Be My Valentine? 💖</h1>
-        <div class="buttons">
-            <button class="yes" onclick="playMusic()">Yes</button>
-            <button class="no" onclick="moveButton(this)">No</button>
-        </div>
-        <p id="message">Yay! You're the sweetest! 💕 Can't wait to spend life together! 😍</p>
+        <h1>There is something special for you! 💝</h1>
+        <p>Click below to see it!</p>
+        <button class="heart-button" onclick="showValentinePage()">❤️ Click Here ❤️</button>
     </div>
     
-    <!-- Make sure to replace 'song.mp3' with the actual filename in your GitHub repo -->
-    <audio id="loveSong" src="song.mp3" preload="auto"></audio>
-
     <script>
+        function showValentinePage() {
+            document.body.innerHTML = `
+                <div class="container">
+                    <h1>Will You Be My Valentine? 💖</h1>
+                    <div class="buttons">
+                        <button class="cute-button yes" onclick="playMusic()"> Yes </button>
+                        <button class="cute-button no" onclick="moveButton(this)"> No </button>
+                    </div>
+                    <p id="message">Yay! You're the sweetest! 💕 Can't wait to spend life together! 😍</p>
+                </div>
+                <audio id="loveSong" src="song.mp3" preload="auto"></audio>
+            `;
+            attachEventListeners();
+        }
+
+        function attachEventListeners() {
+            document.querySelector('.yes').addEventListener('click', function() {
+                playMusic();
+                document.getElementById('message').style.display = 'block';
+            });
+            document.querySelector('.no').addEventListener('click', function() {
+                moveButton(this);
+            });
+        }
+
         function playMusic() {
             let audio = document.getElementById('loveSong');
             audio.play().catch(error => console.log("Autoplay prevented: ", error));
-            document.getElementById('message').style.display = 'block';
         }
 
         function moveButton(btn) {
