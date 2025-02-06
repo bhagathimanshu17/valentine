@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #ffaad5, #ff7ec1);
+            color: #5e3c3c;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #9b2d20;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+        .music-player {
+            margin-top: 40px;
+        }
+
+        .message {
+            font-size: 20px;
+            font-style: italic;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .heart {
+            font-size: 40px;
+            color: #ff3377;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff4d6b;
+            transform: scale(1.05);
+        }
+
+        .response-message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #ff4d6b;
+        }
+
+        .no-btn-moving {
+            position: absolute;
+            animation: moveNo 2s linear infinite;
+            pointer-events: none; /* Prevent interaction while moving */
+        }
+
+        @keyframes moveNo {
+            0% { top: 10%; left: 10%; }
+            25% { top: 10%; left: 70%; }
+            50% { top: 50%; left: 70%; }
+            75% { top: 80%; left: 30%; }
+            100% { top: 80%; left: 10%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Will You Be My Valentine, Gunsheen?</h1>
+    <p>From the moment we met, my world has been so much brighter. I can't imagine my life without you, and this Valentine's Day, I just want to ask you...</p>
+    
+    <p class="heart">❤️</p>
+    
+    <p class="message">Will you be my Valentine? 💕</p>
+
+    <!-- Yes/No Buttons -->
+    <div class="buttons">
+        <button id="yesBtn" onclick="respond('yes')">Yes</button>
+        <button id="noBtn" onclick="respond('no')">No</button>
+    </div>
+
+    <!-- Response Message -->
+    <p id="responseMessage" class="response-message"></p>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <audio controls autoplay>
+            <source src="https://drive.google.com/uc?export=download&id=1M9lMVqiLKixYBtFF4k1Xhkn0e5zaSe82" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</div>
+
+<script>
+    // Function to display response based on button click
+    function respond(answer) {
+        var message = "";
+        if (answer === "yes") {
+            message = "Yay! 💖 You are my Valentine! 💕";
+            // Hide the no button after "Yes" is clicked (but keep the Yes button visible)
+            document.getElementById("noBtn").style.display = 'none';
+        } else if (answer === "no") {
+            message = "Oh no! 😢 You're making it hard for me!";
+            // Make the "No" button move around
+            document.getElementById("noBtn").classList.add("no-btn-moving");
+            // Disable the "No" button so it can't be clicked again
+            document.getElementById("noBtn").disabled = true;
+        }
+        document.getElementById("responseMessage").innerText = message;
+        
+        // "Yes" button should stay visible and clickable
+        // Hide the "Yes" button after it's clicked
+        document.getElementById("yesBtn").style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
